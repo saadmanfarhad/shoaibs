@@ -8,4 +8,4 @@ const menuSchema = new Schema({
   price: Number
 });
 
-module.exports = menuSchema;
+mongoose.model('menus', menuSchema);

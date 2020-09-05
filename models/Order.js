@@ -11,7 +11,8 @@ const orderSchema = new Schema({
       quantity: Number
     }
   ],
+  status: { type: Boolean, default: false },
   createdAt: Date
 });
 
-module.exports = orderSchema;
+mongoose.model('orders', orderSchema);
