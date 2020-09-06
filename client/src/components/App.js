@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import * as actions from '../actions';
 
 import Header from './Header';
+import Footer from './Footer';
+import Menu from './menu/Menu';
 
 const App = () => {
 
@@ -12,6 +14,8 @@ const App = () => {
       <BrowserRouter>
         <div>
           <Header />
+          <Menu />
+          <Footer />
           {/*<Route exact path="/" component={Landing} />*/}
         </div>
       </BrowserRouter>
