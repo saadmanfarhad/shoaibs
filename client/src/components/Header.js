@@ -1,9 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Header = () => {
-  const orderLength = useSelector(state => state.order);
-  console.log(orderLength);
+  const orderLength = useSelector(state => state.checkout.length);
 
   return (
     <nav className="db dt-l w-100 border-box pa3 ph5-l">
@@ -15,13 +14,13 @@ const Header = () => {
         Shoaib's
       </a>
       <div className="db dtc-l v-mid w-100 w-75-l tc tr-l">
-        <a className="link dim dark-gray f6 f5-l dib" href="/cart" title="Contact">
+        <a className="link dim dark-gray f6 f5-l dib" href="/checkout" title="Contact">
           <img
             src={require("../assets/shopping-cart.svg")}
             className="dib w3 h2 br-100"
             alt="cart"
           />
-          {orderLength.length}
+          {orderLength}
         </a>
       </div>
     </nav>

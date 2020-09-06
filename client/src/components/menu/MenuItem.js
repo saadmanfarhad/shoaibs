@@ -38,11 +38,18 @@ const MenuItem = props => {
             />
           </div>
           <div className="dtc w-50 tc">
-            <button onClick={() => props.addItem({
-              name: props.menu.name,
-              quantity: parseInt(quantity),
-              id: props.menu._id
-            })} className="w-50">
+            <button
+              onClick={() => {
+                props.addItem({
+                  name: props.menu.name,
+                  quantity: parseInt(quantity),
+                  id: props.menu._id,
+                  price: props.menu.price
+                });
+                setQuantity(0);
+              }}
+              disabled={quantity > 0 ? false : true}
+              className="w-50">
               Add
             </button>
           </div>

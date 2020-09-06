@@ -12,10 +12,9 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const order = JSON.parse(localStorage.getItem('order'));
-    if (order) {
-      console.log(order);
-      dispatch(actions.updateOrder(order));
+    const checkout = JSON.parse(localStorage.getItem('checkout'));
+    if (checkout) {
+      dispatch(actions.updateCheckout(checkout));
     }
   }, [dispatch]);
 

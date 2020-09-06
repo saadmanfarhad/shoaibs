@@ -7,9 +7,11 @@ const Menu = () => {
   const dispatch = useDispatch();
   const menus = useSelector(state => state.menu);
 
-  const addItemToState = (item) => {
-    dispatch(addItem(item));
-  }
+  const addItemToState = item => {
+    if (item.quantity) {
+      dispatch(addItem(item));
+    }
+  };
 
   useEffect(() => {
     dispatch(fetchMenu());
@@ -65,9 +67,9 @@ const Menu = () => {
         <h1 className="f3 f2-m f1-l fw2 black-90 mv3">Menu</h1>
       </header>
       <div className="cf">
-        {menus.map(m => (
-          <div key={m._id} className="fl w-100 w-50-ns w-50-m w-50-l tc">
-            <MenuItem menu={m} addItem={addItemToState} />
+        {menus.map(menu => (
+          <div key={menu._id} className="fl w-100 w-50-ns w-50-m w-50-l tc">
+            <MenuItem menu={menu} addItem={addItemToState} />
           </div>
         ))}
       </div>
