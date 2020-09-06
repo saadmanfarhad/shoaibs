@@ -14,9 +14,8 @@ const App = () => {
       <BrowserRouter>
         <div>
           <Header />
-          <Menu />
+          <Route exact path="/" component={Menu} />
           <Footer />
-          {/*<Route exact path="/" component={Landing} />*/}
         </div>
       </BrowserRouter>
     </div>

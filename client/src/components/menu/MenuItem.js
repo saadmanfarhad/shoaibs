@@ -8,7 +8,7 @@ const MenuItem = props => {
       <img
         src={props.menu.img}
         className="db w-100 br2 br--top"
-        alt="of a kitten looking menacing."
+        alt={props.menu.name}
       />
       <div className="pa2 ph3-ns pb3-ns">
         <div className="dt w-100 mt1">
@@ -38,7 +38,11 @@ const MenuItem = props => {
             />
           </div>
           <div className="dtc w-50 tc">
-            <button onClick={() => console.log({id: props.menu._id, quantity: parseInt(quantity)})} className="w-50">
+            <button onClick={() => props.addItem({
+              name: props.menu.name,
+              quantity: parseInt(quantity),
+              id: props.menu._id
+            })} className="w-50">
               Add
             </button>
           </div>
