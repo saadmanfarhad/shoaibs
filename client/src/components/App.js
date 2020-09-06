@@ -6,7 +6,7 @@ import * as actions from '../actions';
 import Header from './Header';
 import Footer from './Footer';
 import Menu from './menu/Menu';
-import Checkout from './checkout/Checkout';
+import CheckoutNew from './checkout/CheckoutNew';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const App = () => {
         <div>
           <Header />
           <Route exact path="/" component={Menu} />
-          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/checkout" component={CheckoutNew} />
           <Footer />
         </div>
       </BrowserRouter>

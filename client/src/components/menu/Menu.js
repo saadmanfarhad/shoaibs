@@ -64,7 +64,7 @@ const Menu = () => {
   return menus ? (
     <>
       <header className="tc ph4">
-        <h1 className="f3 f2-m f1-l fw2 black-90 mv3">Menu</h1>
+        <h1 className="f3 f2-m f1-l fw2 black-70 mv3">Menu</h1>
       </header>
       <div className="cf">
         {menus.map(menu => (

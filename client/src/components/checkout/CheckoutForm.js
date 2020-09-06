@@ -5,13 +5,15 @@ import validateEmail from '../../utils/validateEmail';
 import formFields from './formFields';
 
 const CheckoutForm = props => {
-  // const { handleSubmit } = props;
+  const { handleSubmit } = props;
 
   return (
     <main className="pa4 black-80">
-      <form className="measure center">
+      <form className="measure center" onSubmit={handleSubmit(props.onCheckoutSubmit)}>
         <fieldset id="order" className="ba b--transparent ph0 mh0">
-          <legend className="f4 fw6 ph0 mh0">Customer Details</legend>
+          <header className="tc ph4">
+            <h1 className="f3 f2-m f1-l fw2 black-70 mv3">Customer Details</h1>
+          </header>
           {formFields.map(({ name, label }) => (
             <Field
               key={name}

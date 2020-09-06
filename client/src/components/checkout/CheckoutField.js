@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default ({ input, label, meta: { error, touched } }) => {
-  console.log(input, label);
   return (
     <div className="mt3">
       <label className="db fw6 lh-copy f6 black-70">{label}</label>

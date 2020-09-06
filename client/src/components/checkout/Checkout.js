@@ -2,11 +2,12 @@ import React from 'react';
 import Cart from './Cart';
 import CheckoutForm from './CheckoutForm';
 
-const Checkout = () => {
+const Checkout = (props) => {
+  const { onCheckoutSubmit } = props;
   return (
     <>
-      <CheckoutForm />
-      <Cart />
+      <CheckoutForm onCheckoutSubmit={onCheckoutSubmit} />
+      <Cart showButton={true}/>
     </>
   );
 };
