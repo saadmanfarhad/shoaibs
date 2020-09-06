@@ -5,7 +5,8 @@ const menuSchema = new Schema({
   name: String,
   type: String,
   description: String,
-  price: Number
+  price: Number,
+  img: String
 });
 
 mongoose.model('menus', menuSchema);
