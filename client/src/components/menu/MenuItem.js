@@ -1,25 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const MenuItem = props => {
+  const [quantity, setQuantity] = useState(0);
+
   return (
-    <article class="br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-50-l mw-100 center">
+    <article className="br2 ba dark-gray b--black-10 mv4 w-100 w-50-m w-50-l mw-100 center">
       <img
         src={props.menu.img}
-        class="db w-100 br2 br--top"
+        className="db w-100 br2 br--top"
         alt="of a kitten looking menacing."
       />
-      <div class="pa2 ph3-ns pb3-ns">
-        <div class="dt w-100 mt1">
-          <div class="dtc">
-            <h1 class="f5 f4-ns mv0">{props.menu.name}</h1>
+      <div className="pa2 ph3-ns pb3-ns">
+        <div className="dt w-100 mt1">
+          <div className="dtc">
+            <h1 className="f5 f4-ns mv0">{props.menu.name}</h1>
           </div>
-          <div class="dtc tr">
-            <h2 class="f5 mv0">${props.menu.price}</h2>
+          <div className="dtc tr">
+            <h2 className="f5 mv0">${props.menu.price}</h2>
           </div>
         </div>
-        <p class="f6 lh-copy measure mt2 mid-gray">
+        <p className="f6 lh-copy measure mt2 mid-gray">
           {props.menu.description}
         </p>
+        <div className="dt w-100">
+          <div className="dtc w-25">
+            <h1 className="f6 f6-ns mv0">Quantity: </h1>
+          </div>
+          <div className="dtc w-25 tc">
+            <input
+              className="w-50"
+              type="number"
+              name="quantity"
+              value={quantity}
+              min={0}
+              onChange={e => setQuantity(e.target.value)}
+              step="1"
+            />
+          </div>
+          <div className="dtc w-50 tc">
+            <button onClick={() => console.log({id: props.menu._id, quantity: parseInt(quantity)})} className="w-50">
+              Add
+            </button>
+          </div>
+        </div>
       </div>
     </article>
   );
