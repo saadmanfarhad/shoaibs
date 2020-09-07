@@ -4,11 +4,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import formFields from './formFields';
 import Cart from './Cart';
 import * as actions from '../../actions';
-import { map } from 'lodash';
 
 const CheckoutReview = ({ onCancel, history }) => {
   const { values } = useSelector(state => state.form.checkoutForm);
+  const checkout = useSelector(state => state.checkout);
   const dispatch = useDispatch();
+
+  const placeOrder = () => {
+    const order = {
+      ...values,
+      order: checkout,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }
+
+    dispatch(actions.placeOrder(order, history));
+  }
 
   return (
     <main className="black-70">
@@ -32,7 +43,7 @@ const CheckoutReview = ({ onCancel, history }) => {
           >
             Back
           </button>
-          <button onClick={() => console.log('Confirm')}>
+          <button onClick={() => placeOrder()}>
             Confirm Order
           </button>
         </div>

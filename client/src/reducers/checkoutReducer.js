@@ -1,4 +1,9 @@
-import { ADD_ITEM, UPDATE_CHECKOUT, CLEAR_CHECKOUT } from '../actions/types';
+import {
+  ADD_ITEM,
+  UPDATE_CHECKOUT,
+  CLEAR_CHECKOUT,
+  PLACE_ORDER
+} from '../actions/types';
 
 export default function(state = [], action) {
   switch (action.type) {
@@ -11,6 +16,12 @@ export default function(state = [], action) {
     case CLEAR_CHECKOUT:
       localStorage.clear();
       return [];
+    case PLACE_ORDER:
+      if (action.payload.status) {
+        return [];
+      }
+
+      return state;
     default:
       return state;
   }

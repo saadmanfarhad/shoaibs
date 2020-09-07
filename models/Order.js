@@ -5,14 +5,15 @@ const orderSchema = new Schema({
   name: String,
   contactNumber: String,
   email: String,
-  orders: [
+  order: [
     {
       item: { type: Schema.Types.ObjectId, ref: 'Menu' },
       quantity: Number
     }
   ],
   status: { type: Boolean, default: false },
-  createdAt: Date
+  createdAt: Date,
+  updatedAt: Date
 });
 
 mongoose.model('orders', orderSchema);
