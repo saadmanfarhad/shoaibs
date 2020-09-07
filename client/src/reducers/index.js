@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as reduxForm } from 'redux-form';
 import menuReducer from './menuReducer';
-import checkout from './checkoutReducer';
+import orderReducer from './orderReducer';
+import checkoutReducer from './checkoutReducer';
 
 export default combineReducers({
   menu: menuReducer,
   form: reduxForm,
-  checkout: checkout
+  checkout: checkoutReducer,
+  order: orderReducer
 });

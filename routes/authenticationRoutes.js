@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Admin = mongoose.model('admins');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
-const jwt = require('express-jwt');
 const keys = require('../config/keys')
 
 module.exports = app => {

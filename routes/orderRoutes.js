@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Order = mongoose.model('orders');
 const requireLogin = require('../middlewares/requireLogin');
-const jwt = require('express-jwt');
 const keys = require('../config/keys');
 
 module.exports = app => {
@@ -40,7 +39,13 @@ module.exports = app => {
 
   app.get('/api/order', async (req, res) => {
     try {
-      const orders = await Order.find({});
+      const orders = await Order.find({}).populate({
+        path: 'order',
+        populate: {
+          path: 'item',
+          model: 'menus'
+        }
+      });
       res.send(orders);
     } catch (e) {
       res.status(422).send({ status: false, message: e });

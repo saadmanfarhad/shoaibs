@@ -4,7 +4,8 @@ import {
   ADD_ITEM,
   UPDATE_CHECKOUT,
   CLEAR_CHECKOUT,
-  PLACE_ORDER
+  PLACE_ORDER,
+  FETCH_ORDER
 } from './types';
 
 export const fetchMenu = () => async dispatch => {
@@ -36,3 +37,9 @@ export const placeOrder = (order, history) => async dispatch => {
 
   dispatch({ type: PLACE_ORDER, payload: res.data });
 };
+
+export const fetchOrder = () => async dispatch => {
+  const res = await axios.get('/api/order');
+
+  dispatch({ type: FETCH_ORDER, payload: res.data });
+}
