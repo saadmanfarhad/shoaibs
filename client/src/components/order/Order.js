@@ -1,11 +1,21 @@
 import React, { useEffect } from 'react';
 import OrderItem from './OrderItem';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchOrder } from '../../actions';
+import { fetchOrder, updateOrder } from '../../actions';
 
 const Order = props => {
   const dispatch = useDispatch();
   const order = useSelector(state => state.order);
+
+  const update = (orderToUpdate) => {
+    const updatedOrder = {
+      ...orderToUpdate,
+      status: !orderToUpdate.status,
+      updatedAt: new Date()
+    }
+
+    dispatch(updateOrder(updatedOrder));
+  }
 
   useEffect(() => {
     dispatch(fetchOrder());
@@ -18,7 +28,7 @@ const Order = props => {
       </header>
       <ul className="list pl0 mt0 measure center">
         {order.map(or => (
-          <OrderItem key={or._id} order={or} />
+          <OrderItem key={or._id} order={or} update={update}/>
         ))}
       </ul>
     </>

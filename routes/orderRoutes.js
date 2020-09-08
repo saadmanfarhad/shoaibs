@@ -13,6 +13,7 @@ module.exports = app => {
       createdAt,
       updatedAt
     } = req.body;
+
     const minifiedOrder = order.map(or => {
       return {
         item: or.id,
@@ -47,6 +48,55 @@ module.exports = app => {
         }
       });
       res.send(orders);
+    } catch (e) {
+      res.status(422).send({ status: false, message: e });
+    }
+  });
+
+  app.put('/api/order', async (req, res) => {
+    try {
+      const {
+        _id,
+        name,
+        contactNumber,
+        email,
+        status,
+        order,
+        createdAt,
+        updatedAt
+      } = req.body;
+
+      const minifiedOrder = order.map(or => {
+        return {
+          ...or,
+          item: or.item._id
+        };
+      });
+
+      const orderToUpdate = {
+        _id,
+        name,
+        contactNumber,
+        email,
+        order: minifiedOrder,
+        createdAt,
+        updatedAt,
+        status
+      };
+
+      const updatedOrder = await Order.findOneAndUpdate(
+        { _id: orderToUpdate._id },
+        orderToUpdate,
+        { new: true }
+      ).populate({
+        path: 'order',
+        populate: {
+          path: 'item',
+          model: 'menus'
+        }
+      });
+
+      res.send({ status: true, message: updatedOrder });
     } catch (e) {
       res.status(422).send({ status: false, message: e });
     }

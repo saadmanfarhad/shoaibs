@@ -24,15 +24,24 @@ const OrderItem = props => {
         <span className="f5 db black-70">Items: {items}</span>
         <span className="f5 db black-70">Bill: {bill}</span>
         <span className="f5 db black-70">
-          Status: {props.order.status ? 'Completed' : 'Not Completed'}
+          Status:{' '}
+          {props.order.status ? (
+            <span className="green">Completed</span>
+          ) : (
+            <span className="red">Not Completed</span>
+          )}
         </span>
-        <span className="f5 db black-70">Created At: {moment(props.order.createdAt).format('DD/MM/YY hh:mm a')}</span>
-        <span className="f5 db black-70">Updated At: {moment(props.order.updatedAt).format('DD/MM/YY hh:mm a')}</span>
+        <span className="f5 db black-70">
+          Created At: {moment(props.order.createdAt).format('DD/MM/YY hh:mm a')}
+        </span>
+        <span className="f5 db black-70">
+          Updated At: {moment(props.order.updatedAt).format('DD/MM/YY hh:mm a')}
+        </span>
       </div>
       {!props.order.status ? (
         <div className="flex">
           <FontAwesomeIcon
-            onClick={() => console.log('Yessss')}
+            onClick={() => props.update(props.order)}
             className="hover-blue pointer"
             icon="check"
           />
