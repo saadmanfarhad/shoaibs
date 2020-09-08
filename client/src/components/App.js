@@ -12,6 +12,7 @@ import CheckoutNew from './checkout/CheckoutNew';
 import Order from './order/Order';
 import Menu from './menu/Menu';
 import ItemForm from './menu/ItemForm';
+import Admin from './admin/Admin';
 
 library.add(faCheck);
 
@@ -31,6 +32,7 @@ const App = () => {
         <div>
           <Header />
           <Route exact path="/" component={Home} />
+          <Route exact path="/admin" component={Admin} />
           <Route exact path="/checkout" component={CheckoutNew} />
           <Route exact path="/order" component={Order} />
           <Route exact path="/menu" component={Menu} />

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Admin = mongoose.model('admins');
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
-const keys = require('../config/keys')
+const keys = require('../config/keys');
 
 module.exports = app => {
   app.post('/api/adminlogin', async (req, res) => {
@@ -25,7 +25,7 @@ module.exports = app => {
         ); // Sigining the token
 
         res.cookie('token', token, { httpOnly: true, maxAge: 86400 });
-        res.json({ token });
+        res.send({ status: true, message: token });
       } else {
         return res.status(401).send({
           status: false,

@@ -8,7 +8,8 @@ import {
   CLEAR_CHECKOUT,
   PLACE_ORDER,
   FETCH_ORDER,
-  UPDATE_ORDER
+  UPDATE_ORDER,
+  ADMIN_LOGIN
 } from './types';
 
 export const fetchMenu = () => async dispatch => {
@@ -56,7 +57,7 @@ export const clearCheckout = () => dispatch => {
 export const placeOrder = (order, history) => async dispatch => {
   const res = await axios.post('/api/order', order);
   if (res.data.status) {
-    localStorage.removeItem('order')
+    localStorage.removeItem('order');
     alert('Order Placed Successfully');
     history.push('/');
   } else {
@@ -79,4 +80,17 @@ export const updateOrder = order => async dispatch => {
   }
 
   dispatch({ type: UPDATE_ORDER, payload: res.data });
+};
+
+export const adminLogin = (credentials, history) => async dispatch => {
+  try {
+    const res = await axios.post('/api/adminlogin', credentials);
+    if (res.data.status) {
+      history.push('/menu');
+    }
+
+    dispatch({ type: ADMIN_LOGIN, payload: res.data });
+  } catch (e) {
+    alert(e.response.data.message);
+  }
 };

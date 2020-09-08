@@ -7,3 +7,4 @@ export const CLEAR_CHECKOUT = 'clear_checkout';
 export const PLACE_ORDER = 'place_order';
 export const FETCH_ORDER = 'fetch_order';
 export const UPDATE_ORDER = 'update_order';
+export const ADMIN_LOGIN = 'admin_login';

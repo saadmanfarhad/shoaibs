@@ -1,26 +1,35 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import CheckoutField from './CheckoutField';
-import validateEmail from '../../utils/validateEmail';
+import AdminField from './AdminField';
 import formFields from './formFields';
+import { adminLogin } from '../../actions';
 
-const CheckoutForm = props => {
-  const { handleSubmit } = props;
+const Admin = ({ handleSubmit, history }) => {
+  const dispatch = useDispatch();
+  const { values } = useSelector(state => state.form.adminForm);
+
+  const login = () => {
+    if (values) {
+      dispatch(adminLogin(values, history));
+    }
+  };
 
   return (
     <main className="pa4 black-80">
-      <form className="measure center" onSubmit={handleSubmit(props.onCheckoutSubmit)}>
+      <form className="measure center" onSubmit={handleSubmit(login)}>
         <fieldset id="order" className="ba b--transparent ph0 mh0">
           <header className="tc ph4">
-            <h1 className="f3 f2-m f1-l fw2 black-70 mv3">Customer Details</h1>
+            <h1 className="f3 f2-m f1-l fw2 black-70 mv3">Sign In</h1>
           </header>
-          {formFields.map(({ name, label }) => (
+          {formFields.map(({ name, type, label }) => (
             <Field
               key={name}
               label={label}
-              type="text"
+              type={type}
               name={name}
-              component={CheckoutField}
+              component={AdminField}
             />
           ))}
         </fieldset>
@@ -28,7 +37,7 @@ const CheckoutForm = props => {
           <input
             className="b black-70 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
             type="submit"
-            value="Next"
+            value="Sign In"
           />
         </div>
       </form>
@@ -38,8 +47,6 @@ const CheckoutForm = props => {
 
 const validate = values => {
   const errors = {};
-
-  errors.email = validateEmail(values.email || '');
 
   formFields.forEach(({ name }) => {
     if (!values[name]) {
@@ -52,6 +59,6 @@ const validate = values => {
 
 export default reduxForm({
   validate,
-  form: 'checkoutForm',
-  destroyOnUnmount: false
-})(CheckoutForm);
+  form: 'adminForm',
+  destroyOnUnmount: true
+})(withRouter(Admin));
