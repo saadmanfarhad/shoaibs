@@ -6,7 +6,9 @@ const menuSchema = new Schema({
   type: String,
   description: String,
   price: Number,
-  img: String
+  img: String,
+  createdAt: Date,
+  updatedAt: Date
 });
 
 mongoose.model('menus', menuSchema);

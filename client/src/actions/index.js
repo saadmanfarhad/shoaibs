@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
   FETCH_MENU,
+  UPDATE_MENU,
   ADD_ITEM,
   UPDATE_CHECKOUT,
   CLEAR_CHECKOUT,
@@ -30,6 +31,7 @@ export const clearCheckout = () => dispatch => {
 export const placeOrder = (order, history) => async dispatch => {
   const res = await axios.post('/api/order', order);
   if (res.data.status) {
+    localStorage.removeItem('order')
     alert('Order Placed Successfully');
     history.push('/');
   } else {
@@ -52,4 +54,16 @@ export const updateOrder = order => async dispatch => {
   }
 
   dispatch({ type: UPDATE_ORDER, payload: res.data });
+};
+
+export const updateMenu = (menuItem, history) => async dispatch => {
+  const res = await axios.put('/api/menu', menuItem);
+  if (res.data.status) {
+    alert('Item Edited Successfully');
+    history.push('/menu');
+  } else {
+    alert('Error, please try again!');
+  }
+
+  dispatch({ type: UPDATE_MENU, payload: res.data });
 };

@@ -7,9 +7,11 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
 import Header from './Header';
 import Footer from './Footer';
-import Menu from './menu/Menu';
+import Home from './home/Home';
 import CheckoutNew from './checkout/CheckoutNew';
 import Order from './order/Order';
+import Menu from './menu/Menu';
+import ItemForm from './menu/ItemForm';
 
 library.add(faCheck);
 
@@ -28,9 +30,11 @@ const App = () => {
       <BrowserRouter>
         <div>
           <Header />
-          <Route exact path="/" component={Menu} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/checkout" component={CheckoutNew} />
           <Route exact path="/order" component={Order} />
+          <Route exact path="/menu" component={Menu} />
+          <Route exact path="/addOrEdit" component={ItemForm} />
           <Footer />
         </div>
       </BrowserRouter>
