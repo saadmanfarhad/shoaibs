@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   FETCH_MENU,
   UPDATE_MENU,
+  ADD_MENU,
   ADD_ITEM,
   UPDATE_CHECKOUT,
   CLEAR_CHECKOUT,
@@ -14,6 +15,30 @@ export const fetchMenu = () => async dispatch => {
   const res = await axios.get('/api/menu');
 
   dispatch({ type: FETCH_MENU, payload: res.data });
+};
+
+export const addMenu = (menuItem, history) => async dispatch => {
+  const res = await axios.post('/api/menu', menuItem);
+  if (res.data.status) {
+    alert('Item Added Successfully');
+    history.push('/menu');
+  } else {
+    alert('Error, please try again!');
+  }
+
+  dispatch({ type: ADD_MENU, payload: res.data });
+};
+
+export const updateMenu = (menuItem, history) => async dispatch => {
+  const res = await axios.put('/api/menu', menuItem);
+  if (res.data.status) {
+    alert('Item Edited Successfully');
+    history.push('/menu');
+  } else {
+    alert('Error, please try again!');
+  }
+
+  dispatch({ type: UPDATE_MENU, payload: res.data });
 };
 
 export const addItem = item => dispatch => {
@@ -54,16 +79,4 @@ export const updateOrder = order => async dispatch => {
   }
 
   dispatch({ type: UPDATE_ORDER, payload: res.data });
-};
-
-export const updateMenu = (menuItem, history) => async dispatch => {
-  const res = await axios.put('/api/menu', menuItem);
-  if (res.data.status) {
-    alert('Item Edited Successfully');
-    history.push('/menu');
-  } else {
-    alert('Error, please try again!');
-  }
-
-  dispatch({ type: UPDATE_MENU, payload: res.data });
 };

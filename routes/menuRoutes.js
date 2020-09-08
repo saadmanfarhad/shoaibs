@@ -11,6 +11,31 @@ module.exports = app => {
     }
   });
 
+  app.post('/api/menu', async (req, res) => {
+    const {
+      name,
+      price,
+      description,
+      img
+    } = req.body;
+
+    const menuItem = new Menu({
+      name,
+      price: parseInt(price),
+      description,
+      img,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+
+    try {
+      await menuItem.save();
+      res.send({ status: true });
+    } catch (e) {
+      res.status(422).send({ status: false, message: e });
+    }
+  });
+
   app.put('/api/menu', async (req, res) => {
     try {
       const {

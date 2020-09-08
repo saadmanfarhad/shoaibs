@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { reduxForm, Field, change } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { updateMenu } from '../../actions';
+import { updateMenu, addMenu } from '../../actions';
 import ItemField from './ItemField';
 import formFields from './formFields';
 
@@ -28,6 +28,12 @@ const ItemForm = ({ handleSubmit, history }) => {
             img: res.data.secure_url
           }
           dispatch(updateMenu(updatedValues, history));
+        } else {
+          const updatedValues = {
+            ...values,
+            img: res.data.secure_url
+          }
+          dispatch(addMenu(updatedValues, history));
         }
       } catch (e) {
         console.log(e);
@@ -35,6 +41,8 @@ const ItemForm = ({ handleSubmit, history }) => {
     } else {
       if (values.id) {
         dispatch(updateMenu(values, history));
+      } else {
+        alert('No image selected!');
       }
     }
   };
