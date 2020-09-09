@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Admin = mongoose.model('admins');
 const bcrypt = require('bcrypt');
+const requireLogin = require('../middlewares/requireLogin');
 const jsonwebtoken = require('jsonwebtoken');
 const keys = require('../config/keys');
 
@@ -24,7 +25,7 @@ module.exports = app => {
           { expiresIn: 129600 }
         ); // Sigining the token
 
-        res.cookie('token', token, { httpOnly: true, maxAge: 86400 });
+        res.cookie('token', token, { httpOnly: true, maxAge: 10 * 60 * 1000 });
         res.send({ status: true, message: token });
       } else {
         return res.status(401).send({
@@ -35,5 +36,9 @@ module.exports = app => {
     } catch (e) {
       res.status(422).send({ status: false, message: e });
     }
+  });
+
+  app.get('/api/me', requireLogin, (req, res) => {
+    res.send({ status: true, user: req.user });
   });
 };

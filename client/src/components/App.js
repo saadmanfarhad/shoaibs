@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import * as actions from '../actions';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faCheck,
+  faLongArrowAltRight
+} from '@fortawesome/free-solid-svg-icons';
 
 import Header from './Header';
 import Footer from './Footer';
@@ -13,8 +16,9 @@ import Order from './order/Order';
 import Menu from './menu/Menu';
 import ItemForm from './menu/ItemForm';
 import Admin from './admin/Admin';
+import ProtectedComponent from './ProtectedComponent';
 
-library.add(faCheck);
+library.add(faCheck, faLongArrowAltRight);
 
 const App = () => {
   const dispatch = useDispatch();
@@ -34,9 +38,11 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/checkout" component={CheckoutNew} />
-          <Route exact path="/order" component={Order} />
-          <Route exact path="/menu" component={Menu} />
-          <Route exact path="/addOrEdit" component={ItemForm} />
+          <Switch>
+            <ProtectedComponent exact path="/addOrEdit" component={ItemForm} />
+            <ProtectedComponent exact path="/order" component={Order} />
+            <ProtectedComponent exact path="/menu" component={Menu} />
+          </Switch>
           <Footer />
         </div>
       </BrowserRouter>

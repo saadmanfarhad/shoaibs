@@ -11,7 +11,7 @@ const MenuItem = (props) => {
 
   return (
     <article>
-      <div onClick={() => goToAddOrEdit()} className="link dt w-100 bb b--black-10 pb2 mt2 dim blue">
+      <div onClick={() => goToAddOrEdit()} className="link pointer dt w-100 bb b--black-10 pb2 mt2 dim blue">
         <div className="dtc w4">
           <img
             src={props.item.img}

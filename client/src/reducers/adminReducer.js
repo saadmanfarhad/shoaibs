@@ -5,7 +5,7 @@ export default function(state = {}, action) {
     case ADMIN_LOGIN:
       return {
         ...state,
-        token: action.payload.message
+        admin: action.payload.status ? true : false
       };
     default:
       return state;
