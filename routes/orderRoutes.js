@@ -38,7 +38,7 @@ module.exports = app => {
     }
   });
 
-  app.get('/api/order', async (req, res) => {
+  app.get('/api/order', requireLogin, async (req, res) => {
     try {
       const orders = await Order.find({}).populate({
         path: 'order',
@@ -46,46 +46,28 @@ module.exports = app => {
           path: 'item',
           model: 'menus'
         }
-      });
+      }).sort({"createdAt": -1});
       res.send(orders);
     } catch (e) {
       res.status(422).send({ status: false, message: e });
     }
   });
 
-  app.put('/api/order', async (req, res) => {
+  app.put('/api/order', requireLogin, async (req, res) => {
     try {
       const {
         _id,
-        name,
-        contactNumber,
-        email,
         status,
-        order,
-        createdAt,
         updatedAt
       } = req.body;
 
-      const minifiedOrder = order.map(or => {
-        return {
-          ...or,
-          item: or.item._id
-        };
-      });
-
       const orderToUpdate = {
-        _id,
-        name,
-        contactNumber,
-        email,
-        order: minifiedOrder,
-        createdAt,
         updatedAt,
         status
       };
 
       const updatedOrder = await Order.findOneAndUpdate(
-        { _id: orderToUpdate._id },
+        { _id: _id },
         orderToUpdate,
         { new: true }
       ).populate({

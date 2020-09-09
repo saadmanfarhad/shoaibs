@@ -10,7 +10,7 @@ const Order = props => {
 
   const update = orderToUpdate => {
     const updatedOrder = {
-      ...orderToUpdate,
+      _id: orderToUpdate._id,
       status: !orderToUpdate.status,
       updatedAt: new Date()
     };
