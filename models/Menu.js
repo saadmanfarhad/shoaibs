@@ -7,6 +7,7 @@ const menuSchema = new Schema({
   description: String,
   price: Number,
   img: String,
+  isDeleted: { type: Boolean, default: false },
   createdAt: Date,
   updatedAt: Date
 });

@@ -4,7 +4,7 @@ const Menu = mongoose.model('menus');
 module.exports = app => {
   app.get('/api/menu', async (req, res) => {
     try {
-      const menu = await Menu.find({});
+      const menu = await Menu.find({ isDeleted: false });
       res.send(menu);
     } catch (e) {
       res.status(422).send({ status: false, message: e });
@@ -59,9 +59,13 @@ module.exports = app => {
   app.delete('/api/menu', async (req, res) => {
     try {
       const { id } = req.body;
-      await Menu.findByIdAndDelete(id);
+      const deletedMenuItem = await Menu.findOneAndUpdate(
+        { _id: id },
+        { isDeleted: true },
+        { new: true }
+      );
 
-      res.send({ status: true });
+      res.send({ status: true, message: deletedMenuItem });
     } catch (e) {
       res.status(422).send({ status: false, message: e });
     }
