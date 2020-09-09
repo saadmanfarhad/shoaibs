@@ -1,6 +1,7 @@
 export const FETCH_MENU = 'fetch_menu';
 export const UPDATE_MENU = 'update_menu';
 export const ADD_MENU = 'add_menu';
+export const DELETE_MENU = 'delete_menu';
 export const ADD_ITEM = 'add_item';
 export const UPDATE_CHECKOUT = 'update_checkout';
 export const CLEAR_CHECKOUT = 'clear_checkout';

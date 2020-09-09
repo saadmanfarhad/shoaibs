@@ -4,7 +4,7 @@ const Menu = mongoose.model('menus');
 module.exports = app => {
   app.get('/api/menu', async (req, res) => {
     try {
-      const menu = await Menu.find({ });
+      const menu = await Menu.find({});
       res.send(menu);
     } catch (e) {
       res.status(422).send({ status: false, message: e });
@@ -12,12 +12,7 @@ module.exports = app => {
   });
 
   app.post('/api/menu', async (req, res) => {
-    const {
-      name,
-      price,
-      description,
-      img
-    } = req.body;
+    const { name, price, description, img } = req.body;
 
     const menuItem = new Menu({
       name,
@@ -38,14 +33,7 @@ module.exports = app => {
 
   app.put('/api/menu', async (req, res) => {
     try {
-      const {
-        id,
-        name,
-        price,
-        description,
-        img,
-        updatedAt
-      } = req.body;
+      const { id, name, price, description, img, updatedAt } = req.body;
 
       const menuItemToUpdate = {
         id,
@@ -63,6 +51,17 @@ module.exports = app => {
       );
 
       res.send({ status: true, message: updatedMenuItem });
+    } catch (e) {
+      res.status(422).send({ status: false, message: e });
+    }
+  });
+
+  app.delete('/api/menu', async (req, res) => {
+    try {
+      const { id } = req.body;
+      await Menu.findByIdAndDelete(id);
+
+      res.send({ status: true });
     } catch (e) {
       res.status(422).send({ status: false, message: e });
     }

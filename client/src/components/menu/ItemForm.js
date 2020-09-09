@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { reduxForm, Field, change } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { updateMenu, addMenu } from '../../actions';
+import { updateMenu, addMenu, deleteMenu } from '../../actions';
 import ItemField from './ItemField';
 import formFields from './formFields';
 
@@ -14,25 +14,28 @@ const ItemForm = ({ handleSubmit, history }) => {
 
   const addOrUpdate = async () => {
     if (values.image) {
-      const file  = values.image[0];
+      const file = values.image[0];
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', 'udozvnyx');
 
       try {
-        const res = await axios.post('https://api.Cloudinary.com/v1_1/hatch-limited/image/upload', formData);
+        const res = await axios.post(
+          'https://api.Cloudinary.com/v1_1/hatch-limited/image/upload',
+          formData
+        );
 
         if (values.id) {
           const updatedValues = {
             ...values,
             img: res.data.secure_url
-          }
+          };
           dispatch(updateMenu(updatedValues, history));
         } else {
           const updatedValues = {
             ...values,
             img: res.data.secure_url
-          }
+          };
           dispatch(addMenu(updatedValues, history));
         }
       } catch (e) {
@@ -89,9 +92,16 @@ const ItemForm = ({ handleSubmit, history }) => {
             type="submit"
             value="Save"
           />
-          <button className="b red ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib">
-            Delete
-          </button>
+          {img ? (
+            <input
+              className="b red ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+              onClick={() => dispatch(deleteMenu(values.id, history))}
+              type="button"
+              value="Delete"
+            />
+          ) : (
+            undefined
+          )}
         </div>
       </form>
     </main>

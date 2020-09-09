@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   FETCH_MENU,
   UPDATE_MENU,
+  DELETE_MENU,
   ADD_MENU,
   ADD_ITEM,
   UPDATE_CHECKOUT,
@@ -42,6 +43,18 @@ export const updateMenu = (menuItem, history) => async dispatch => {
   dispatch({ type: UPDATE_MENU, payload: res.data });
 };
 
+export const deleteMenu = (id, history) => async dispatch => {
+  const res = await axios.delete('/api/menu', { data: { id } });
+  if (res.data.status) {
+    alert('Item Deleted Successfully');
+    history.push('/menu');
+  } else {
+    alert('Error, please try again!');
+  }
+
+  dispatch({ type: DELETE_MENU, payload: res.data });
+};
+
 export const addItem = item => dispatch => {
   dispatch({ type: ADD_ITEM, payload: item });
 };
@@ -57,7 +70,7 @@ export const clearCheckout = () => dispatch => {
 export const placeOrder = (order, history) => async dispatch => {
   const res = await axios.post('/api/order', order);
   if (res.data.status) {
-    localStorage.removeItem('order');
+    localStorage.removeItem('checkout');
     alert('Order Placed Successfully');
     history.push('/');
   } else {
