@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import HomeItem from './HomeItem';
 import { fetchMenu, addItem } from '../../actions';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Home = () => {
+  // const [item, setItem] = useState(undefined);
   const dispatch = useDispatch();
   const menus = useSelector(state => state.menu);
 
@@ -59,6 +60,7 @@ const Home = () => {
     //       'Yummy Pizzaasdasd asda sdasd asdaaaaaaaaaaaaaaaaasd asd asdas dasdqwoind iansd ansdpanw pasndpi anw fpianscpi ansfp idnaspiic naspinf paisnc piasncpaisnd pian fpians pia n fpinap ifnapscnapnapnf apins pian fpin!!!'
     //   }
     // ];
+    // setItem(items);
   }, [dispatch]);
 
   return menus ? (
@@ -68,7 +70,7 @@ const Home = () => {
       </header>
       <div className="cf">
         {menus.map(menu => (
-          <div key={menu._id} className="fl w-100 w-50-ns w-50-m w-50-l tc">
+          <div key={menu._id} className="fl w-100 w-50-ns w-50-m w-50-l">
             <HomeItem menu={menu} addItem={addItemToCart} />
           </div>
         ))}

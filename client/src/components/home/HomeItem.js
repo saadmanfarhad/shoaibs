@@ -19,7 +19,7 @@ const HomeItem = props => {
             <h2 className="f5 mv0">${props.menu.price}</h2>
           </div>
         </div>
-        <p className="f6 lh-copy measure mt2 mid-gray">
+        <p className="f6 f5-ns lh-copy measure mt2 mid-gray">
           {props.menu.description}
         </p>
         <div className="dt w-100">
