@@ -15,7 +15,7 @@ export default ({ input, type, label, meta: { error, touched } }) => {
             {...input}
             type={type}
             value={label === 'Image' ? undefined : input.value}
-            className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
+            className="pa2 input-reset ba bw1 bg-transparent hover-bg-black hover-white w-100"
           />
         )
       }

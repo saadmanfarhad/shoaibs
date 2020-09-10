@@ -31,9 +31,9 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="cover bg-left bg-center-l" style={{backgroundImage: `url(${require('../assets/main-bg.jpg')})`}}>
       <BrowserRouter>
-        <div>
+        <div className="bg-black-10 min-vh-100">
           <Header />
           <Route exact path="/" component={Home} />
           <Route exact path="/admin" component={Admin} />
