@@ -17,7 +17,7 @@ const ItemForm = ({ handleSubmit, history }) => {
       const file = values.image[0];
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('upload_preset', 'udozvnyx');
+      formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_PRESET);
 
       try {
         const res = await axios.post(

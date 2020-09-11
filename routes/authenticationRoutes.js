@@ -25,7 +25,7 @@ module.exports = app => {
           { expiresIn: 129600 }
         ); // Sigining the token
 
-        res.cookie('token', token, { httpOnly: true, maxAge: 10 * 60 * 1000 });
+        res.cookie('token', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
         res.send({ status: true, message: token });
       } else {
         return res.status(401).send({

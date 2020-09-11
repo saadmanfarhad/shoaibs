@@ -10,7 +10,7 @@ const MenuItem = (props) => {
   }
 
   return (
-    <article>
+    <article className="bg-white-50">
       <div onClick={() => goToAddOrEdit()} className="link pointer dt w-100 bb b--black-10 pb2 mt2 dim blue">
         <div className="dtc w4">
           <img
@@ -20,8 +20,8 @@ const MenuItem = (props) => {
           />
         </div>
         <div className="dtc v-top pl2">
-          <h1 className="f6 f4-ns fw6 lh-title black mv0">{props.item.name}</h1>
-          <h2 className="f6 fw4 mt2 mb0 black-60">{props.item.description}</h2>
+          <h1 className="f6 f3-ns fw6 lh-title black mv0">{props.item.name}</h1>
+          <h2 className="f6 f4-ns fw4 mt2 mb0 black-60">{props.item.description}</h2>
           <dl className="mt2 f6">
             <dt className="clip">Price</dt>
             <dd className="ml0">${props.item.price}</dd>
