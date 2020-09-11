@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="pv4 ph3 ph5-ns tc">
       <a
-        className="link dim gray dib h2 w2 br-100 mr3 "
+        className="link dim black-60 dib h2 w2 h3-ns w3-ns br-100 mr3 "
         href="https://www.facebook.com"
         title=""
       >

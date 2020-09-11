@@ -5,7 +5,8 @@ import * as actions from '../actions';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faCheck,
-  faLongArrowAltRight
+  faLongArrowAltRight,
+  faShoppingCart
 } from '@fortawesome/free-solid-svg-icons';
 
 import Header from './Header';
@@ -18,7 +19,7 @@ import ItemForm from './menu/ItemForm';
 import Admin from './admin/Admin';
 import ProtectedComponent from './ProtectedComponent';
 
-library.add(faCheck, faLongArrowAltRight);
+library.add(faCheck, faLongArrowAltRight, faShoppingCart);
 
 const App = () => {
   const dispatch = useDispatch();
