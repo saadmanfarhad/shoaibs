@@ -15,6 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.disable('x-powered-by');
 
 require('./routes/menuRoutes')(app);
 require('./routes/orderRoutes')(app);
