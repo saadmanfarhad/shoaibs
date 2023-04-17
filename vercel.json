@@ -1,9 +1,5 @@
 {
   "regions": ["iad1"],
-  "env": {
-    "MONGO_URL": "@mongo_url",
-    "SECRET": "@secret"
-  },
   "builds": [
     { "src": "index.js", "use": "@now/node" },
     {
