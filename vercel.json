@@ -1,7 +1,7 @@
 {
   "regions": ["iad1"],
   "env": {
-    "MONGO_URL": "@mongo-url",
+    "MONGO_URL": "@mongo_url",
     "SECRET": "@secret"
   },
   "builds": [
