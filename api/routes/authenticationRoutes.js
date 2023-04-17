@@ -1,12 +1,12 @@
-const mongoose = require('mongoose');
-const Admin = mongoose.model('admins');
-const bcrypt = require('bcrypt');
-const requireLogin = require('../middlewares/requireLogin');
-const jsonwebtoken = require('jsonwebtoken');
-const keys = require('../config/keys');
+const mongoose = require("mongoose");
+const Admin = mongoose.model("admins");
+const bcrypt = require("bcrypt");
+const requireLogin = require("../api/middlewares/requireLogin");
+const jsonwebtoken = require("jsonwebtoken");
+const keys = require("../api/config/keys");
 
-module.exports = app => {
-  app.post('/api/adminlogin', async (req, res) => {
+module.exports = (app) => {
+  app.post("/api/adminlogin", async (req, res) => {
     const { username, password } = req.body;
 
     try {
@@ -15,7 +15,7 @@ module.exports = app => {
       if (admin === null || admin.length === 0) {
         return res
           .status(404)
-          .send({ status: false, message: 'Admin not found' });
+          .send({ status: false, message: "Admin not found" });
       }
 
       if (bcrypt.compareSync(password, admin.hashedPassword)) {
@@ -25,12 +25,15 @@ module.exports = app => {
           { expiresIn: 129600 }
         ); // Sigining the token
 
-        res.cookie('token', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
+        res.cookie("token", token, {
+          httpOnly: true,
+          maxAge: 30 * 24 * 60 * 60 * 1000,
+        });
         res.send({ status: true, message: token });
       } else {
         return res.status(401).send({
           status: false,
-          message: 'Username or password is incorrect'
+          message: "Username or password is incorrect",
         });
       }
     } catch (e) {
@@ -38,7 +41,7 @@ module.exports = app => {
     }
   });
 
-  app.get('/api/me', requireLogin, (req, res) => {
+  app.get("/api/me", requireLogin, (req, res) => {
     res.send({ status: true, user: req.user });
   });
 };

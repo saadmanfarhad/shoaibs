@@ -1,7 +1,7 @@
 {
   "regions": ["iad1"],
   "builds": [
-    { "src": "index.js", "use": "@now/node" },
+    { "src": "index.js", "use": "@vercel/node" },
     {
       "src": "client/package.json",
       "use": "@vercel/static-build",
@@ -12,7 +12,7 @@
     {
       "src": "/api/(.*)",
       "headers": { "cache-control": "s-maxage=0" },
-      "dest": "api/src/app.js"
+      "dest": "api/index.js"
     },
     {
       "src": "/static/(.*)",

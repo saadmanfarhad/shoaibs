@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const Menu = mongoose.model('menus');
-const requireLogin = require('../middlewares/requireLogin');
+const mongoose = require("mongoose");
+const Menu = mongoose.model("menus");
+const requireLogin = require("../api/middlewares/requireLogin");
 
-module.exports = app => {
-  app.get('/api/menu', async (req, res) => {
+module.exports = (app) => {
+  app.get("/api/menu", async (req, res) => {
     try {
       const menu = await Menu.find({ isDeleted: false });
       res.send(menu);
@@ -12,7 +12,7 @@ module.exports = app => {
     }
   });
 
-  app.post('/api/menu', requireLogin, async (req, res) => {
+  app.post("/api/menu", requireLogin, async (req, res) => {
     const { name, price, description, img } = req.body;
 
     const menuItem = new Menu({
@@ -21,7 +21,7 @@ module.exports = app => {
       description,
       img,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
 
     try {
@@ -32,7 +32,7 @@ module.exports = app => {
     }
   });
 
-  app.put('/api/menu', requireLogin, async (req, res) => {
+  app.put("/api/menu", requireLogin, async (req, res) => {
     try {
       const { id, name, price, description, img, updatedAt } = req.body;
 
@@ -42,7 +42,7 @@ module.exports = app => {
         price: parseInt(price),
         description,
         img,
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       const updatedMenuItem = await Menu.findOneAndUpdate(
@@ -57,7 +57,7 @@ module.exports = app => {
     }
   });
 
-  app.delete('/api/menu', requireLogin, async (req, res) => {
+  app.delete("/api/menu", requireLogin, async (req, res) => {
     try {
       const { id } = req.body;
       const deletedMenuItem = await Menu.findOneAndUpdate(
