@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const Admin = mongoose.model("admins");
 const bcrypt = require("bcrypt");
-const requireLogin = require("../api/middlewares/requireLogin");
+const requireLogin = require("../middlewares/requireLogin");
 const jsonwebtoken = require("jsonwebtoken");
-const keys = require("../api/config/keys");
+const keys = require("../config/keys");
 
 module.exports = (app) => {
   app.post("/api/adminlogin", async (req, res) => {

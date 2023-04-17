@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Order = mongoose.model("orders");
-const requireLogin = require("../api/middlewares/requireLogin");
-const keys = require("../api/config/keys");
+const requireLogin = require("../middlewares/requireLogin");
+const keys = require("../config/keys");
 
 module.exports = (app) => {
   app.post("/api/order", async (req, res) => {

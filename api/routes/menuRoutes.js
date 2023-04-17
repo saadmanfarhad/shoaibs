@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Menu = mongoose.model("menus");
-const requireLogin = require("../api/middlewares/requireLogin");
+const requireLogin = require("../middlewares/requireLogin");
 
 module.exports = (app) => {
   app.get("/api/menu", async (req, res) => {
