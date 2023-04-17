@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const keys = require("./api/config/keys");
+const keys = require("./config/keys");
 
 require("./models/Menu");
 require("./models/Order");
@@ -23,7 +23,7 @@ require("./routes/authenticationRoutes")(app);
 // require('./routes/adminRoutes')(app);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static("../client/build"));
 
   const path = require("path");
   app.get("*", (req, res) => {
