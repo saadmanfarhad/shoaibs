@@ -1,40 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { withRouter } from 'react-router-dom';
-import { reduxForm, Field, change } from 'redux-form';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { updateMenu, addMenu, deleteMenu } from '../../actions';
-import ItemField from './ItemField';
-import formFields from './formFields';
+import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
+import { reduxForm, Field, change } from "redux-form";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { updateMenu, addMenu, deleteMenu } from "../../actions";
+import ItemField from "./ItemField";
+import formFields from "./formFields";
 
 const ItemForm = ({ handleSubmit, history }) => {
   const dispatch = useDispatch();
-  const { values } = useSelector(state => state.form.itemForm);
+  const { values } = useSelector((state) => state.form.itemForm);
   const [img, setImg] = useState(undefined);
+  const { REACT_APP_CLOUDINARY_PRESET, REACT_APP_CLOUDINARY_URL } = process.env;
 
   const addOrUpdate = async () => {
     if (values.image) {
       const file = values.image[0];
       const formData = new FormData();
-      formData.append('file', file);
-      formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_PRESET);
+      formData.append("file", file);
+      formData.append("upload_preset", REACT_APP_CLOUDINARY_PRESET);
 
       try {
-        const res = await axios.post(
-          'https://api.Cloudinary.com/v1_1/hatch-limited/image/upload',
-          formData
-        );
+        const res = await axios.post(REACT_APP_CLOUDINARY_URL, formData);
 
         if (values.id) {
           const updatedValues = {
             ...values,
-            img: res.data.secure_url
+            img: res.data.secure_url,
           };
           dispatch(updateMenu(updatedValues, history));
         } else {
           const updatedValues = {
             ...values,
-            img: res.data.secure_url
+            img: res.data.secure_url,
           };
           dispatch(addMenu(updatedValues, history));
         }
@@ -45,19 +43,19 @@ const ItemForm = ({ handleSubmit, history }) => {
       if (values.id) {
         dispatch(updateMenu(values, history));
       } else {
-        alert('No image selected!');
+        alert("No image selected!");
       }
     }
   };
 
   useEffect(() => {
-    const menuItem = JSON.parse(localStorage.getItem('item'));
+    const menuItem = JSON.parse(localStorage.getItem("item"));
     if (menuItem) {
-      dispatch(change('itemForm', 'name', menuItem.name));
-      dispatch(change('itemForm', 'description', menuItem.description));
-      dispatch(change('itemForm', 'price', menuItem.price));
-      dispatch(change('itemForm', 'id', menuItem._id));
-      dispatch(change('itemForm', 'img', menuItem.img));
+      dispatch(change("itemForm", "name", menuItem.name));
+      dispatch(change("itemForm", "description", menuItem.description));
+      dispatch(change("itemForm", "price", menuItem.price));
+      dispatch(change("itemForm", "id", menuItem._id));
+      dispatch(change("itemForm", "img", menuItem.img));
       setImg(menuItem.img);
     }
   }, [dispatch]);
@@ -73,9 +71,7 @@ const ItemForm = ({ handleSubmit, history }) => {
             <div className="center w5">
               <img src={img} alt={img} className="db w-100" />
             </div>
-          ) : (
-            undefined
-          )}
+          ) : undefined}
           {formFields.map(({ name, label, type }) => (
             <Field
               key={name}
@@ -99,19 +95,17 @@ const ItemForm = ({ handleSubmit, history }) => {
               type="button"
               value="Delete"
             />
-          ) : (
-            undefined
-          )}
+          ) : undefined}
         </div>
       </form>
     </main>
   );
 };
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
   formFields.forEach(({ name }) => {
-    if (!values[name] && name !== 'image') {
+    if (!values[name] && name !== "image") {
       errors[name] = `You must provide a ${name}!`;
     }
   });
@@ -121,6 +115,6 @@ const validate = values => {
 
 export default reduxForm({
   validate,
-  form: 'itemForm',
-  destroyOnUnmount: true
+  form: "itemForm",
+  destroyOnUnmount: true,
 })(withRouter(ItemForm));
