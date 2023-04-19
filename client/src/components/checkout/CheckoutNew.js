@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import {reduxForm} from 'redux-form';
-import Checkout from './Checkout';
-import CheckoutReview from './CheckoutReview';
+import React, { useState } from "react";
+import { reduxForm } from "redux-form";
+import Checkout from "./Checkout";
+import CheckoutReview from "./CheckoutReview";
 
 const CheckoutNew = () => {
   const [showFormReview, setShowFormReview] = useState(false);
@@ -18,5 +18,6 @@ const CheckoutNew = () => {
 };
 
 export default reduxForm({
-  form: 'checkoutForm'
+  form: "checkoutForm",
+  initialValues: {},
 })(CheckoutNew);

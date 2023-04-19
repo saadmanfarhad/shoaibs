@@ -117,4 +117,5 @@ export default reduxForm({
   validate,
   form: "itemForm",
   destroyOnUnmount: true,
+  initialValues: {},
 })(withRouter(ItemForm));

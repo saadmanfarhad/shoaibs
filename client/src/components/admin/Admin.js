@@ -1,14 +1,14 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
-import AdminField from './AdminField';
-import formFields from './formFields';
-import { adminLogin } from '../../actions';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { reduxForm, Field } from "redux-form";
+import AdminField from "./AdminField";
+import formFields from "./formFields";
+import { adminLogin } from "../../actions";
 
 const Admin = ({ handleSubmit, history }) => {
   const dispatch = useDispatch();
-  const { values } = useSelector(state => state.form.adminForm);
+  const { values } = useSelector((state) => state.form.adminForm);
 
   const login = () => {
     if (values) {
@@ -45,7 +45,7 @@ const Admin = ({ handleSubmit, history }) => {
   );
 };
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
 
   formFields.forEach(({ name }) => {
@@ -59,6 +59,7 @@ const validate = values => {
 
 export default reduxForm({
   validate,
-  form: 'adminForm',
-  destroyOnUnmount: true
+  form: "adminForm",
+  destroyOnUnmount: true,
+  initialValues: {},
 })(withRouter(Admin));
